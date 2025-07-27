@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Form with JavaScript</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 2rem;
+    }
+    form {
+      max-width: 500px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    label {
+      font-weight: bold;
+    }
+    input, textarea {
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+    input:invalid, textarea:invalid {
+      border: 2px solid red;
+      background: #ffe6e6;
+    }
+    input:valid, textarea:valid {
+      border: 2px solid green;
+    }
+    .warning {
+      color: orange;
+    }
+    .error {
+      color: red;
+    }
+    .flash {
+      animation: flash 0.4s ease-in-out;
+    }
+    @keyframes flash {
+      0% { background: #ffcccc; }
+      100% { background: white; }
+    }
+    output {
+      display: block;
+      font-size: 0.9rem;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <form id="contactForm" action="https://httpbin.org/post" method="POST">
+    <label for="name">Name <span>*</span></label>
+    <input id="name" name="name" type="text" required pattern="[A-Za-z\s\-']+" />
+    
+    <label for="email">Email <span>*</span></label>
+    <input id="email" name="email" type="email" required />
+    
+    <label for="comments">Comments <span>*</span></label>
+    <textarea id="comments" name="comments" required maxlength="200"></textarea>
+    <output id="char-count">200 characters remaining</output>
+    
+    <input type="hidden" name="possible_bot" value="true" />
+    <input type="hidden" name="form-errors" id="form-errors" value="[]" />
+    
+    <button type="submit">Send</button>
+    
+    <output id="error-output"></output>
+    <output id="info-output"></output>
+  </form>
+
+  <script>
+    const form = document.getElementById('contactForm');
+    const nameField = document.getElementById('name');
+    const commentsField = document.getElementById('comments');
+    const errorOutput = document.getElementById('error-output');
+    const infoOutput = document.getElementById('info-output');
+    const charCount = document.getElementById('char-count');
+    const formErrorsField = document.getElementById('form-errors');
+
+    let form_errors = [];
+
+    nameField.addEventListener('input', e => {
+      const validChars = /^[A-Za-z\s\-']+$/;
+      if (!validChars.test(nameField.value) && nameField.value !== '') {
+        showError("Name contains invalid characters.");
+        flashField(nameField);
+        nameField.setCustomValidity("Name must contain only letters.");
+        addError("name", nameField.value, "Invalid characters");
+      } else {
+        nameField.setCustomValidity("");
+      }
+    });
+
+    commentsField.addEventListener('input', e => {
+      const maxLen = commentsField.maxLength;
+      const currentLen = commentsField.value.length;
+      const remaining = maxLen - currentLen;
+      charCount.textContent = `${remaining} characters remaining`;
+
+      if (remaining < 25) {
+        charCount.classList.add("warning");
+      } else {
+        charCount.classList.remove("warning");
+      }
+
+      if (currentLen > maxLen) {
+        addError("comments", commentsField.value, "Exceeded max characters");
+      }
+    });
+
+    function showError(msg) {
+      errorOutput.textContent = msg;
+      errorOutput.classList.add("error");
+      setTimeout(() => {
+        errorOutput.textContent = "";
+        errorOutput.classList.remove("error");
+      }, 3000);
+    }
+
+    function flashField(field) {
+      field.classList.add("flash");
+      setTimeout(() => {
+        field.classList.remove("flash");
+      }, 400);
+    }
+
+    function addError(field, value, message) {
+      form_errors.push({
+        field: field,
+        value: value,
+        message: message,
+        timestamp: new Date().toISOString()
+      });
+      formErrorsField.value = JSON.stringify(form_errors);
+    }
+
+    form.addEventListener("submit", function (e) {
+      form_errors = []; // reset
+      formErrorsField.value = "[]";
+
+      const fields = [nameField, commentsField];
+      fields.forEach(field => {
+        if (!field.checkValidity()) {
+          addError(field.name, field.value, field.validationMessage);
+        }
+      });
+
+      formErrorsField.value = JSON.stringify(form_errors);
+    });
+  </script>
+</body>
+</html>
