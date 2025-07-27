@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel = "stylesheet" href = "style.css">
+  <title>Labs & Experiments</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Experiments with semantic HTML elements." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    custom-box {
+      display: block;
+      border: 2px dashed teal;
+      padding: 1rem;
+      margin: 1rem 0;
+      background: #eef;
+    }
+  </style>
+  <script>
+    class HelloWorld extends HTMLElement {
+      constructor() {
+        super();
+        console.log("Hello world from custom element!");
+      }
+    }
+    customElements.define("hello-world", HelloWorld);
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Labs & Semantic Elements Showcase</h1>
+    <nav>
+      <span class="hamburger">☰</span>
+      <ul>
+        <li><a href="index.html">Home</a></li> |
+        <li><a href="about.html">About</a></li> |
+        <li><a href="resume.html">Resume</a></li> |
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <hgroup>
+        <h2>Interactive Semantic Elements</h2>
+        <p>Explore lesser-used HTML5 elements below.</p>
+      </hgroup>
+
+      <section>
+        <details>
+          <summary>Click to expand</summary>
+          <p>This is revealed using <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code>.</p>
+        </details>
+
+        <dialog open>This is a <code>&lt;dialog&gt;</code> element.</dialog>
+
+        <canvas width="200" height="100" style="border:1px solid #000;">Canvas fallback text</canvas>
+
+        <svg width="100" height="100">
+          <circle cx="50" cy="50" r="40" fill="blue" />
+        </svg>
+
+        <video width="320" height="240" controls>
+          <source src="sample.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        <audio controls>
+          <source src="sample.mp3" type="audio/mpeg" />
+          Your browser does not support the audio tag.
+        </audio>
+
+        <progress value="60" max="100">60%</progress>
+      </section>
+
+      <section>
+        <h2>Tables, Forms & Lists</h2>
+        <form>
+          <fieldset>
+            <legend>Contact Preferences</legend>
+            <label for="email">Email: <input id="email" name="email" type="email" /></label><br />
+            <label for="contact-method">Preferred method:</label>
+            <select id="contact-method" name="method">
+              <optgroup label="Electronic">
+                <option>Email</option>
+                <option>Text</option>
+              </optgroup>
+              <optgroup label="Offline">
+                <option>Call</option>
+                <option>Mail</option>
+              </optgroup>
+            </select><br />
+            <label for="message">Message:</label><br />
+            <textarea id="message" name="message" rows="4" cols="30"></textarea><br />
+            <button type="submit">Submit</button>
+          </fieldset>
+        </form>
+
+        <table>
+          <caption>Sample Table</caption>
+          <colgroup>
+            <col style="background-color:#fdd;">
+            <col style="background-color:#dfd;">
+          </colgroup>
+          <thead>
+            <tr><th>Name</th><th>Age</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Alice</td><td>24</td></tr>
+            <tr><td>Bob</td><td>30</td></tr>
+          </tbody>
+        </table>
+
+        <dl>
+          <dt><dfn>HTML</dfn></dt>
+          <dd>HyperText Markup Language</dd>
+          <dt><dfn>CSS</dfn></dt>
+          <dd>Cascading Style Sheets</dd>
+        </dl>
+
+        <ul>
+          <li><abbr title="Cascading Style Sheets">CSS</abbr></li>
+          <li><abbr title="JavaScript">JS</abbr></li>
+        </ul>
+
+        <ol>
+          <li><kbd>Ctrl</kbd> + <kbd>C</kbd> to copy</li>
+          <li><kbd>Ctrl</kbd> + <kbd>V</kbd> to paste</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>Code & Markup</h2>
+        <pre><code>const msg = "Hello";</code></pre>
+        <blockquote cite="https://developer.mozilla.org">
+          HTML is the standard markup language for creating Web pages.
+        </blockquote>
+        <p>This is <strong>important</strong>, <em>emphasized</em>, <ins>inserted</ins>, and <del>deleted</del> text. <cite>CSS Mastery</cite></p>
+      </section>
+
+      <section>
+        <h2>Media & Pictures</h2>
+        <picture>
+          <source srcset="small.jpg" media="(max-width: 600px)" />
+          <source srcset="large.jpg" media="(min-width: 601px)" />
+          <img src="default.jpg" alt="Responsive Image" />
+        </picture>
+
+        <figure>
+          <img src="figure.jpg" alt="Example figure" />
+          <figcaption>An example figure with caption.</figcaption>
+        </figure>
+
+        <iframe src="https://example.com" title="Embedded Site" width="300" height="150"></iframe>
+      </section>
+
+      <section>
+        <h2>Search & Custom Tags</h2>
+        <search>
+          <label for="search">Search:</label>
+          <input type="search" id="search" name="search" list="suggestions" />
+          <datalist id="suggestions">
+            <option value="HTML" />
+            <option value="CSS" />
+            <option value="JS" />
+          </datalist>
+        </search>
+
+        <custom-box>This is a custom semantic-styled element</custom-box>
+        <hello-world></hello-world>
+      </section>
+    </article>
+  </main>
+
+  <footer>
+    <address>Contact: <a href="mailto:you@example.com">you@example.com</a></address>
+  </footer>
+
+  <noscript>
+    <p>This site might work better with JavaScript enabled.</p>
+  </noscript>
+</body>
+</html>

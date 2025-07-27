@@ -1,0 +1,176 @@
+/* === CSS Variables with fallback === */
+:root {
+  --main-color: hsl(210, 100%, 50%);
+  --accent-color: color(display-p3 1 0.5 0); /* Extra Credit: wide gamut color */
+  --font-size-base: 1rem;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+/* === Custom Font with fallback === */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+/* === Scoped styles === */
+body {
+  font-family: var(--font-sans, sans-serif);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  margin: 0;
+  color: #222;
+  background-color: #f8f9fa;
+}
+
+/* === Layout with CSS Grid === */
+main {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 2rem;
+}
+
+/* === Responsive Flexbox Header === */
+header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--main-color);
+  color: white;
+  padding: 1rem;
+}
+
+/* === Navigation Menu === */
+nav ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: yellow;
+}
+
+/* === CSS Animation Example === */
+@keyframes slideIn {
+  from {
+    transform: translateX(-50%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+h1, h2 {
+  animation: slideIn 1s ease;
+}
+
+/* === CSS Transform + Transition === */
+button:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+/* === Responsive Design: Media Query === */
+@media (min-width: 768px) {
+  main {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  header {
+    padding: 2rem;
+  }
+}
+
+/* === Use of relative units and dv* units === */
+section {
+  margin: 2rem 5%;
+  padding: 1rem;
+  min-height: 30dvh;
+  font-size: 1.1em;
+}
+
+/* === Extra Credit: color-mix and has() === */
+.card:has(img) {
+  border: 2px solid color-mix(in srgb, var(--main-color) 70%, white 30%);
+  padding: 1rem;
+  border-radius: 1rem;
+}
+.profile-image, .interest-img, .resume-icons, .lab-img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0.75rem;
+  margin: 1rem 0;
+}
+
+figure {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+figcaption {
+  font-size: 0.95rem;
+  color: var(--text-secondary, #555);
+  margin-top: 0.5rem;
+}
+
+
+/* Base (Desktop First) */
+body {
+  font-size: 1rem;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  body {
+    font-size: 0.95rem;
+  }
+
+  nav ul {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+}
+
+/* Phone */
+@media (max-width: 480px) {
+  body {
+    font-size: 0.9rem;
+  }
+
+  header, nav, main, footer {
+    padding: 0.5em;
+  }
+
+  nav ul {
+    display: none; /* Hide full nav */
+  }
+
+  .hamburger {
+    display: block; /* Show hamburger */
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  .hero-img {
+    object-position: center top;
+  }
+}
+
+
+
+
+
+
+
+
