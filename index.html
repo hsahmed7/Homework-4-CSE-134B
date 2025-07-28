@@ -49,30 +49,7 @@
 
   <footer>
   </footer>
-/*
-  <script>
-  const toggle = document.getElementById('theme-toggle');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const savedTheme = localStorage.getItem('theme');
 
-  if (savedTheme) {
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    toggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-  } else if (prefersDark) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    toggle.textContent = '☀️';
-  }
-
-  toggle.addEventListener('click', () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    toggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-  });
-</script>
-
-*/
 <script src="theme.js" defer></script>
 </body>
 </html>
