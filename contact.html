@@ -22,26 +22,21 @@
 
  <main>
   <h2>Contact Me</h2>
-  <form action="https://httpbin.org/post" method="POST" id="contactForm">
-    <label for="name">Name <span aria-hidden="true"></span></label>
-    <input type="text" name="name" id="name" required>
+  <form name="contact" method="POST" data-netlify="true" action="/thank-you.html">
+  <input type="hidden" name="form-name" value="contact">
 
-    <label for="email">Email <span aria-hidden="true"></span></label>
-    <input type="email" name="email" id="email" required>
+  <label for="name">Name</label>
+  <input type="text" name="name" id="name" required>
 
-    <label for="comments">Comments</label>
-    <textarea name="comments" id="comments" rows="4"></textarea>
+  <label for="email">Email</label>
+  <input type="email" name="email" id="email" required>
 
-    <!-- Hidden bot field -->
-    <input type="hidden" name="possible_bot" value="true">
+  <label for="comments">Comments</label>
+  <textarea name="comments" id="comments" rows="4"></textarea>
 
-    <!-- Submit -->
-    <button type="submit">Send Message</button>
+  <button type="submit">Send Message</button>
+</form>
 
-    <!-- Output for messages -->
-    <output id="errorOutput" class="error-message" aria-live="assertive"></output>
-    <output id="infoOutput" class="info-message" aria-live="polite"></output>
-  </form>
 </main>
 
 
